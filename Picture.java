@@ -111,6 +111,40 @@ public class Picture extends SimplePicture
     }
   }
   
+  public void negateColors()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+    	  int red = pixelObj.getRed();
+    	  pixelObj.setRed(255-red);
+    	  
+    	  int green = pixelObj.getGreen();
+    	  pixelObj.setGreen(255-green);
+    	  
+    	  int blue = pixelObj.getBlue();
+    	  pixelObj.setBlue(255-blue);
+      }
+    }
+  }
+  
+  public void grayscale()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+       int grayColor = (pixelObj.getBlue()+pixelObj.getRed()+pixelObj.getGreen())/3;
+       pixelObj.setBlue(grayColor);
+       pixelObj.setGreen(grayColor);
+       pixelObj.setRed(grayColor);
+      }
+    }
+  }
+  
   /** Method that mirrors the picture around a 
     * vertical mirror in the center of the picture
     * from left to right */
@@ -237,10 +271,12 @@ public class Picture extends SimplePicture
   public static void main(String[] args) 
   {
     Picture beach = new Picture("/Users/hannahanderson-brownlee/git/u4picturelab-anderson-brownleeh/images/beach.jpg");
-    beach.explore();
+    //beach.explore();
     //beach.zeroBlue();
     //beach.explore();
-    beach.olnyBlue();
+    beach.negateColors();
+    beach.explore();
+    beach.grayscale();
     beach.explore();
   }
   
